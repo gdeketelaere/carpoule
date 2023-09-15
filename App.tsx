@@ -20,6 +20,8 @@ import {
   Comfortaa_600SemiBold,
   Comfortaa_700Bold
 } from '@expo-google-fonts/comfortaa';
+import { Navigation } from './components/navigation/navigation';
+import { Home } from './screens/home';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -40,17 +42,9 @@ export default function App() {
   });
   if (!fontsLoaded) return null;
   return (
-    <View className="bg-mint-500 flex-1 px-8">
-      <View className="pt-16">
-        <Logo />
-      </View>
-      <Text className="font-Comfortaa_300Light uppercase pt-4 rounded-2xl text-4xl text-mint-900">
-        Êtes-vous prêt à carpouler?
-      </Text>
-      <Text className="text-xl font-Inter_400Regular text-grey-800">
-        Organisez vos covoiturages simplement avec vos proches, voisins ou
-        membres de votre club sportif.
-      </Text>
+    <View className="bg-mint-500 flex-1 ">
+      <Home />
+      <Navigation />
       <StatusBar style="auto" />
     </View>
   );
