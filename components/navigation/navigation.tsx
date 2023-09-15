@@ -1,12 +1,16 @@
-import { Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 export const Navigation = () => {
+  const navigation = useNavigation();
   return (
     <View className="absolute bottom-4 w-full left-0 px-4">
       <View className="w-full bg-mint-900 px-8 py-4 rounded-full flex flex-row justify-between">
-        <Text className="text-white font-Inter_700Bold text-base">
-          A propos
-        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('About' as never)}>
+          <Text className="text-white font-Inter_700Bold text-base">
+            A propos
+          </Text>
+        </TouchableOpacity>
         <Text className="text-white font-Inter_700Bold text-base">
           Vos carpoules
         </Text>
