@@ -25,10 +25,21 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View } from 'react-native';
 import { Logo } from './components/logo/logo';
+import { Login } from './screens/login';
+import { useEffect, useState } from 'react';
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { FIREBASE_AUTH } from './FirebaseConfig';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [user, setUser] = useState<User | null>(null);
+  useEffect(() => {
+    onAuthStateChanged(FIREBASE_AUTH, (user) => {
+      console.log('user', user);
+      setUser(user);
+    });
+  }, []);
   const [fontsLoaded] = useFonts({
     Inter_100Thin,
     Inter_200ExtraLight,
@@ -46,6 +57,7 @@ export default function App() {
     Comfortaa_700Bold
   });
   if (!fontsLoaded) return null;
+
   return (
     <NavigationContainer>
       <View className="bg-mint-500 flex-1 ">
@@ -61,6 +73,11 @@ export default function App() {
           <Stack.Screen
             name="About"
             component={About}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
