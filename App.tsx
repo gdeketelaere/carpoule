@@ -29,6 +29,8 @@ import { Login } from './screens/login';
 import { useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
+import { ScreenWrapper } from './components/layout/screenWrapper';
+import { PoulesList } from './screens/poulesList';
 
 const Stack = createNativeStackNavigator();
 
@@ -59,31 +61,33 @@ export default function App() {
   if (!fontsLoaded) return null;
 
   return (
-    <NavigationContainer>
-      <View className="bg-mint-500 flex-1 ">
-        <View className="pt-16 px-8">
-          <Logo />
+    <ScreenWrapper>
+      <NavigationContainer>
+        <View className="bg-mint-500 flex-1 ">
+          <View className="pt-2 px-8">
+            <Logo />
+          </View>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="About"
+              component={About}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Login"
+              component={PoulesList}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+          <Navigation />
+          <StatusBar style="auto" />
         </View>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="About"
-            component={About}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-        <Navigation />
-        <StatusBar style="auto" />
-      </View>
-    </NavigationContainer>
+      </NavigationContainer>
+    </ScreenWrapper>
   );
 }

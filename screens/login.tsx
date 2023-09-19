@@ -90,14 +90,14 @@ export const Login = ({
         <KeyboardAvoidingView behavior="padding">
           <View className="pt-8 flex flex-col gap-4">
             <TextInput
-              className="bg-white border-black border px-4 py-2 font-Inter_500Medium text-xl"
+              className=" border-black border-b p-2 font-Inter_500Medium text-xl"
               value={email}
               placeholder="email"
               autoCapitalize="none"
               onChangeText={(text) => setEmail(text)}
             ></TextInput>
             <TextInput
-              className="bg-white border-black border px-4 py-2 font-Inter_500Medium text-xl"
+              className="border-black border-b p-2 font-Inter_500Medium text-xl"
               value={password}
               secureTextEntry={true}
               placeholder="password"
@@ -106,16 +106,34 @@ export const Login = ({
             {loading ? (
               <ActivityIndicator size="large" />
             ) : (
-              <StyledView className="flex flex-col gap-4">
-                <Button title="login" onPress={signIn}></Button>
-                <Button title="Create account" onPress={signUp}></Button>
-                <Button title="Log out" onPress={signOut}></Button>
+              <StyledView className="flex flex-col gap-y-4">
+                <TouchableOpacity onPress={signIn}>
+                  <Text className="bg-red-500 rounded-full text-white px-6 py-4 font-Inter_700Bold text-base uppercase text-center">
+                    Connexion
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={signUp}>
+                  <Text className="bg-white border border-gray-800 rounded-full text-grey-800 px-6 py-4 font-Inter_700Bold text-base uppercase text-center">
+                    Créer un compte
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={signOut}>
+                  <Text className="text-center text-base text-grey-800 underline">
+                    Déconnexion
+                  </Text>
+                </TouchableOpacity>
               </StyledView>
             )}
           </View>
-          <View>
-            {user && <Text>user {user.email} is connected</Text>}
-            {user === null && <Text>user not connected</Text>}
+          <View className="mt-8 text-grey-800">
+            {user && (
+              <Text className="text-center ">
+                user {user.email} is connected
+              </Text>
+            )}
+            {user === null && (
+              <Text className="text-center ">user not connected</Text>
+            )}
           </View>
         </KeyboardAvoidingView>
       </View>

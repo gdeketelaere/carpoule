@@ -1,5 +1,4 @@
 import { Text, View } from 'react-native';
-import { Logo } from '../components/logo/logo';
 
 export const Home = () => {
   return (
