@@ -24,15 +24,30 @@ import { About } from './screens/about';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View } from 'react-native';
-import { Logo } from './components/logo/logo';
-import { Login } from './screens/login';
+import { SignIn } from './screens/signin';
 import { useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
 import { ScreenWrapper } from './components/layout/screenWrapper';
-import { PoulesList } from './screens/poulesList';
+import { ItemType, PoulesList } from './screens/poulesList';
+import { PouleDetails } from './screens/pouleDetails';
+import { Header } from './components/header/header';
 
-const Stack = createNativeStackNavigator();
+export type PouleDetailsType = {
+  params: {
+    item?: ItemType | undefined;
+  };
+};
+
+export type RootStackParamList = {
+  Home: undefined;
+  About: undefined;
+  SignIn: undefined;
+  PouleList: undefined;
+  PouleDetails: { item?: ItemType | undefined };
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -64,10 +79,13 @@ export default function App() {
     <ScreenWrapper>
       <NavigationContainer>
         <View className="bg-mint-500 flex-1 ">
-          <View className="pt-2 px-8">
-            <Logo />
-          </View>
-          <Stack.Navigator initialRouteName="Home">
+          <Header />
+          <Stack.Navigator initialRouteName="SignIn">
+            <Stack.Screen
+              name="SignIn"
+              component={SignIn}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="Home"
               component={Home}
@@ -79,8 +97,13 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="Login"
+              name="PouleList"
               component={PoulesList}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="PouleDetails"
+              component={PouleDetails}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

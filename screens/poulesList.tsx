@@ -1,7 +1,8 @@
 import { NavigationProp } from '@react-navigation/native';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
-import { ArrowLeft } from 'react-native-feather';
-type ItemType = {
+import { BackButton } from '../components/buttons/backButton';
+import { PouleCard } from '../components/cards/pouleCard';
+export type ItemType = {
   id: number;
   name: string;
   dateStart: string;
@@ -61,36 +62,14 @@ export const PoulesList = ({
   return (
     <View className="bg-mint-500 flex-1 ">
       <View className="px-8">
-        <TouchableOpacity onPress={() => navigation.navigate('Home' as never)}>
-          <View className="flex flex-row gap-2 items-center">
-            <ArrowLeft
-              width={32}
-              height={32}
-              className="text-mint-900 relative top-1"
-            />
-            <Text className="font-Comfortaa_300Light uppercase pt-4 text-3xl text-mint-900">
-              Vos carpoules
-            </Text>
-          </View>
-        </TouchableOpacity>
+        <BackButton>Vos Carpoules</BackButton>
         <View className="h-[660]">
           <FlatList
             contentContainerStyle={{ paddingBottom: 30 }}
             showsVerticalScrollIndicator={false}
             data={items}
             renderItem={({ item }) => {
-              return (
-                <TouchableOpacity>
-                  <View className="bg-white rounded-lg py-12 px-4 mt-4">
-                    <Text className="text-gray-500">
-                      {item.dateStart} {item.timeStart}
-                    </Text>
-                    <Text className="font-Inter_600SemiBold text-lg">
-                      {item.name}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              );
+              return <PouleCard item={item} />;
             }}
             keyExtractor={(item) => `row-${item.id}`}
           />
