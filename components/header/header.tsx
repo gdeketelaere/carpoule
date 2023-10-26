@@ -6,6 +6,7 @@ import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigation } from '../navigation/navigation';
 import * as Icon from 'react-native-feather';
+import classNames from 'classnames';
 
 export const Header = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -16,13 +17,18 @@ export const Header = () => {
     });
   }, []);
   return (
-    <View className="pt-2 px-8 flex flex-row items-center w-full justify-between">
+    <View className="pt-2 px-4 flex flex-row items-center w-full justify-between">
       <Logo />
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           {user && (
-            <View className="h-10 w-10 bg-mint-100 rounded-full">
-              <Text>{user?.email}</Text>
+            <View
+              className={classNames(
+                'h-10 w-10 bg-mint-100 rounded-full flex items-center justify-center',
+                user?.email ? 'bg-mint-900' : 'bg-mint-100 '
+              )}
+            >
+              <Text className="text-mint-100 text-base">GD</Text>
             </View>
           )}
           {user === null && (
@@ -30,7 +36,7 @@ export const Header = () => {
               <Icon.User
                 width={21}
                 height={21}
-                className="text-mint-500 relative top-1"
+                className=" fill-mint-900 relative top-1"
               />
             </View>
           )}

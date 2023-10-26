@@ -24,11 +24,11 @@ import { About } from './screens/about';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View } from 'react-native';
-import { SignIn } from './screens/signin';
+import { Login } from './screens/login';
 import { useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
-import { ScreenWrapper } from './components/layout/screenWrapper';
+import { AppWrapper } from './components/layout/appWrapper';
 import { ItemType, PoulesList } from './screens/poulesList';
 import { PouleDetails } from './screens/pouleDetails';
 import { Header } from './components/header/header';
@@ -42,7 +42,7 @@ export type PouleDetailsType = {
 export type RootStackParamList = {
   Home: undefined;
   About: undefined;
-  SignIn: undefined;
+  Login: undefined;
   PouleList: undefined;
   PouleDetails: { item?: ItemType | undefined };
 };
@@ -76,14 +76,14 @@ export default function App() {
   if (!fontsLoaded) return null;
 
   return (
-    <ScreenWrapper>
+    <AppWrapper>
       <NavigationContainer>
         <View className="bg-mint-500 flex-1 ">
           <Header />
-          <Stack.Navigator initialRouteName="SignIn">
+          <Stack.Navigator initialRouteName="Login">
             <Stack.Screen
-              name="SignIn"
-              component={SignIn}
+              name="Login"
+              component={Login}
               options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -111,6 +111,6 @@ export default function App() {
           <StatusBar style="auto" />
         </View>
       </NavigationContainer>
-    </ScreenWrapper>
+    </AppWrapper>
   );
 }

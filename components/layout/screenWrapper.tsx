@@ -1,13 +1,10 @@
 import { ReactNode } from 'react';
-import { Platform, StatusBar, View } from 'react-native';
+import { View } from 'react-native';
 
 export const ScreenWrapper = ({ children }: { children: ReactNode }) => {
-  let statusBarHeight = StatusBar.currentHeight
-    ? StatusBar.currentHeight
-    : Platform.OS === 'ios'
-    ? 30
-    : 0;
   return (
-    <View style={{ paddingTop: statusBarHeight, flex: 1 }}>{children}</View>
+    <View className="bg-mint-500 flex-1 h-full">
+      <View className="px-4 h-full">{children}</View>
+    </View>
   );
 };
