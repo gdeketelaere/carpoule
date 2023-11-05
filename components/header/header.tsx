@@ -2,41 +2,43 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { Logo } from '../logo/logo';
 import { useEffect, useState } from 'react';
 import { User, onAuthStateChanged } from 'firebase/auth';
-import { FIREBASE_AUTH } from '../../FirebaseConfig';
+import { FIREBASE_AUTH, FIRESTORE_DB } from '../../FirebaseConfig';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigation } from '../navigation/navigation';
 import * as Icon from 'react-native-feather';
 import classNames from 'classnames';
+import { doc, getDoc } from 'firebase/firestore';
+import { carPouleUser } from '../../screens/login';
+import { useUserData } from '../../hooks/useUserData';
+
+const capitalizeFirstLetter = (str?: string) => {
+  return str?.charAt(0).toUpperCase();
+};
 
 export const Header = () => {
-  const [user, setUser] = useState<User | null>(null);
   const navigation = useNavigation<StackNavigation>();
-  useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      setUser(user);
-    });
-  }, []);
+  const { userData } = useUserData();
+
   return (
     <View className="pt-2 px-4 flex flex-row items-center w-full justify-between">
       <Logo />
       <View>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          {user && (
-            <View
-              className={classNames(
-                'h-10 w-10 bg-mint-100 rounded-full flex items-center justify-center',
-                user?.email ? 'bg-mint-900' : 'bg-mint-100 '
-              )}
-            >
-              <Text className="text-mint-100 text-base">GD</Text>
+          {userData ? (
+            <View className="h-10 w-10 rounded-full flex items-center justify-center bg-mint-900">
+              <Text className="text-mint-100 text-base uppercase">
+                {`${capitalizeFirstLetter(
+                  userData?.firstname
+                )}${capitalizeFirstLetter(userData?.lastname)}`}
+              </Text>
             </View>
-          )}
-          {user === null && (
-            <View className="h-10 w-10 bg-mint-100 rounded-full flex items-center justify-center">
+          ) : (
+            <View className="h-10 w-10 bg-mint-100  rounded-full flex items-center justify-center">
               <Icon.User
                 width={21}
                 height={21}
-                className=" fill-mint-900 relative top-1"
+                stroke="#9BE1CF"
+                className="relative top-1"
               />
             </View>
           )}

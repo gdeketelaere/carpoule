@@ -25,9 +25,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View } from 'react-native';
 import { Login } from './screens/login';
-import { useEffect, useState } from 'react';
-import { User, onAuthStateChanged } from 'firebase/auth';
-import { FIREBASE_AUTH } from './FirebaseConfig';
 import { AppWrapper } from './components/layout/appWrapper';
 import { ItemType, PoulesList } from './screens/poulesList';
 import { PouleDetails } from './screens/pouleDetails';
@@ -50,13 +47,6 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
-  const [user, setUser] = useState<User | null>(null);
-  useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      console.log('user', user);
-      setUser(user);
-    });
-  }, []);
   const [fontsLoaded] = useFonts({
     Inter_100Thin,
     Inter_200ExtraLight,
