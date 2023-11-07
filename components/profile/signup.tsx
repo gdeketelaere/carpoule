@@ -85,16 +85,17 @@ export const Signup = ({
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
-    <View className="bg-white rounded-2xl flex-1 mb-24 mt-4 p-4">
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-        <View className="absolute right-0 top-0">
-          <X width={32} height={32} className="text-mint-900 relative top-1" />
+    <View className="relative h-full">
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={20}
+        className="bg-white rounded-2xl flex-1 mb-[96px] mt-4 p-4 h-full overflow-hidden"
+        style={{ zIndex: 20 }}
+      >
+        <View className="mx-auto -mt-4">
+          <PouleSignUp width={230} height={250} />
         </View>
-      </TouchableOpacity>
-      <View className="mx-auto -mt-4">
-        <PouleSignUp width={230} height={250} />
-      </View>
-      <KeyboardAvoidingView behavior="padding">
+
         <View className="w-full h-full relative px-4">
           <View className="pt-8 flex flex-col gap-4">
             <TextInput
@@ -153,6 +154,15 @@ export const Signup = ({
           </View>
         </View>
       </KeyboardAvoidingView>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Home')}
+        className="absolute right-2 top-6"
+        style={{ zIndex: 99, elevation: 99 }}
+      >
+        <View>
+          <X width={32} height={32} className="text-mint-900 relative top-1" />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -68,7 +68,7 @@ export default function App() {
   return (
     <AppWrapper>
       <NavigationContainer>
-        <View className="bg-mint-500 flex-1 ">
+        <View className="bg-mint-500 h-screen">
           <Header />
           <Stack.Navigator initialRouteName="Login">
             <Stack.Screen
