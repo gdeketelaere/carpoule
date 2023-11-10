@@ -5,7 +5,7 @@ export const AppWrapper = ({ children }: { children: ReactNode }) => {
   let statusBarHeight = StatusBar.currentHeight
     ? StatusBar.currentHeight
     : Platform.OS === 'ios'
-    ? 30
+    ? 0
     : 0;
   return (
     <View style={{ paddingTop: statusBarHeight, flex: 1 }}>{children}</View>

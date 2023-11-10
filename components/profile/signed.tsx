@@ -1,11 +1,11 @@
 import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
-import { User } from 'firebase/auth';
 import { useUserData } from '../../hooks/useUserData';
 import { BackButton } from '../buttons/backButton';
 
 export const Signed = () => {
   const { userData, loading } = useUserData();
+
   return (
     <View>
       <BackButton toHome={true}>Profile</BackButton>

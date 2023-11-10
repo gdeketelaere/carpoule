@@ -25,6 +25,11 @@ module.exports = {
         Comfortaa_700Bold: ['Comfortaa_700Bold']
       },
       colors: {
+        orange: {
+          100: '#FAEFDC',
+          300: '#FFC964',
+          500: '#FCA243'
+        },
         mint: {
           100: '#CBFFF2',
           500: '#9BE1CF',

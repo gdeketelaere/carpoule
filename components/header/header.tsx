@@ -1,14 +1,8 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Logo } from '../logo/logo';
-import { useEffect, useState } from 'react';
-import { User, onAuthStateChanged } from 'firebase/auth';
-import { FIREBASE_AUTH, FIRESTORE_DB } from '../../FirebaseConfig';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigation } from '../navigation/navigation';
 import * as Icon from 'react-native-feather';
-import classNames from 'classnames';
-import { doc, getDoc } from 'firebase/firestore';
-import { carPouleUser } from '../../screens/login';
 import { useUserData } from '../../hooks/useUserData';
 
 const capitalizeFirstLetter = (str?: string) => {
@@ -20,7 +14,7 @@ export const Header = () => {
   const { userData } = useUserData();
 
   return (
-    <View className="pt-2 px-4 flex flex-row items-center w-full justify-between">
+    <View className="pt-12 px-4 flex flex-row items-center w-full justify-between">
       <Logo />
       <View>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>

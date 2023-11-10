@@ -14,7 +14,7 @@ import { styled } from 'nativewind';
 import { SecondaryButton } from '../buttons/secondaryButton';
 import { carPouleUser } from '../../screens/login';
 import PouleSignUp from '../../assets/poule-signup.svg';
-import { X } from 'react-native-feather';
+import { X, Eye, EyeOff } from 'react-native-feather';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
@@ -56,7 +56,10 @@ export const Signup = ({
   setSignInScreen: React.Dispatch<React.SetStateAction<Boolean>>;
 }) => {
   const [loading, setLoading] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   const StyledView = styled(View);
   const signUp = async (carPouleUser: carPouleUser) => {
     setLoading(true);
@@ -125,15 +128,34 @@ export const Signup = ({
                 setCarPouleUser({ ...carPouleUser, email: text })
               }
             ></TextInput>
-            <TextInput
-              className="border-black border-b p-2 font-Inter_300Light text-xl"
-              value={carPouleUser.password}
-              secureTextEntry={true}
-              placeholder="password"
-              onChangeText={(text) =>
-                setCarPouleUser({ ...carPouleUser, password: text })
-              }
-            ></TextInput>
+            <View className="relative">
+              <TextInput
+                className="border-black border-b p-2 font-Inter_300Light text-xl"
+                value={carPouleUser.password}
+                secureTextEntry={!showPassword}
+                placeholder="password"
+                onChangeText={(text) =>
+                  setCarPouleUser({ ...carPouleUser, password: text })
+                }
+              ></TextInput>
+              {showPassword ? (
+                <EyeOff
+                  width={21}
+                  height={21}
+                  stroke="#3C3C50"
+                  className="absolute right-1 top-4"
+                  onPress={toggleShowPassword}
+                />
+              ) : (
+                <Eye
+                  width={21}
+                  height={21}
+                  stroke="#3C3C50"
+                  className="absolute right-1 top-4"
+                  onPress={toggleShowPassword}
+                />
+              )}
+            </View>
 
             {loading ? (
               <ActivityIndicator size="large" />
