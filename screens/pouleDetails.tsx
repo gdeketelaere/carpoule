@@ -8,7 +8,7 @@ export const PouleDetails = () => {
   const { item } = route.params;
   return (
     <View className="bg-mint-500 flex-1 ">
-      <View className="px-8">
+      <View className="px-4">
         <BackButton>Retour à la liste</BackButton>
         {item && (
           <View className="bg-white rounded-lg py-6 px-4 mt-4">

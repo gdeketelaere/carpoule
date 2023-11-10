@@ -1,9 +1,10 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { Logo } from '../logo/logo';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigation } from '../navigation/navigation';
 import * as Icon from 'react-native-feather';
 import { useUserData } from '../../hooks/useUserData';
+import classNames from 'classnames';
 
 const capitalizeFirstLetter = (str?: string) => {
   return str?.charAt(0).toUpperCase();
@@ -14,7 +15,12 @@ export const Header = () => {
   const { userData } = useUserData();
 
   return (
-    <View className="pt-12 px-4 flex flex-row items-center w-full justify-between">
+    <View
+      className={classNames(
+        Platform.OS === 'ios' ? 'pt-12' : 'pt-2',
+        'px-4 flex flex-row items-center w-full justify-between'
+      )}
+    >
       <Logo />
       <View>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -32,7 +38,7 @@ export const Header = () => {
                 width={21}
                 height={21}
                 stroke="#9BE1CF"
-                className="relative top-1"
+                className="relative"
               />
             </View>
           )}

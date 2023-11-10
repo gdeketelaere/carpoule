@@ -61,7 +61,7 @@ export const PoulesList = ({
 }) => {
   return (
     <View className="bg-mint-500 flex-1 ">
-      <View className="px-8">
+      <View className="px-4">
         <BackButton>Vos Carpoules</BackButton>
         <View className="h-[660]">
           <FlatList

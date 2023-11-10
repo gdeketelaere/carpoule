@@ -29,6 +29,7 @@ import { AppWrapper } from './components/layout/appWrapper';
 import { ItemType, PoulesList } from './screens/poulesList';
 import { PouleDetails } from './screens/pouleDetails';
 import { Header } from './components/header/header';
+import { CreateEvent } from './screens/createEvent';
 
 export type PouleDetailsType = {
   params: {
@@ -42,6 +43,7 @@ export type RootStackParamList = {
   Login: undefined;
   PouleList: undefined;
   PouleDetails: { item?: ItemType | undefined };
+  CreateEvent: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -94,6 +96,11 @@ export default function App() {
             <Stack.Screen
               name="PouleDetails"
               component={PouleDetails}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="CreateEvent"
+              component={CreateEvent}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

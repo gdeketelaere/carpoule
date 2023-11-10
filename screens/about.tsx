@@ -9,7 +9,7 @@ export const About = ({
 }) => {
   return (
     <View className="bg-mint-500 flex-1 ">
-      <View className="px-8">
+      <View className="px-4">
         <BackButton>A propos</BackButton>
         <Text className="text-xl font-Inter_400Regular text-grey-800 mt-4">
           Organisez vos covoiturages simplement avec vos proches, voisins ou
